@@ -15,7 +15,6 @@ rm rpmbuild/SPECS/nginx.spec --force
 wget https://raw.githubusercontent.com/Vozmen/OTUS6_RPM/main/nginx.spec -O /root/rpmbuild/SPECS/nginx.spec
 rpmbuild -bb /root/rpmbuild/SPECS/nginx.spec
 yum localinstall /root/rpmbuild/RPMS/x86_64/nginx-1.14.1-1.el7_4.ngx.x86_64.rpm -y
-yum localinstall rpmbuild/RPMS/x86_64/nginx-1.14.1-1.el7_4.ngx.x86_64.rpm -y
 systemctl start nginx
 mkdir /usr/share/nginx/html/repo
 cp /root/rpmbuild/RPMS/x86_64/nginx-1.14.1-1.el7_4.ngx.x86_64.rpm /usr/share/nginx/html/repo/
