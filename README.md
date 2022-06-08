@@ -50,5 +50,30 @@ createrepo /usr/share/nginx/html/repo/
 nginx -t
 nginx -s reload
 
-Проверил curl
+Проверил через curl
 curl -a http://localhost/repo/
+
+Добавил репозиторий в /etc/yum.repos.d/
+cat >> /etc/yum.repos.d/otus.repo << EOF
+[otus]
+name=otus-linux
+baseurl=http://localhost/repo
+gpgcheck=0
+enabled=1
+EOF
+
+Проверил подключение репозитория.
+По второй команде вывод команды отличается от вывода в методичке
+yum repolist enabled | grep otus
+yum list | grep otus
+
+[root@rpm ~]# yum repolist enabled | grep otus
+otus                      otus-linux                                           2
+[root@rpm ~]# yum list | grep otus
+percona-release.noarch                      1.0-9                      @otus
+
+Установил percona-release
+yum install percona-release -y
+
+После установки вывод команды yum list | grep otus не показывает ничего. Я попробовал удалить эту программу, после чего она вернулась в вывод. Установил заново, в выоде она осталась
+Я так и не смог разобраться, почему nginx не выводится, как показано в методичке.
